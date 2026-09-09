@@ -44,10 +44,23 @@ body{
   transition:opacity 1s ease;
 }
 
-#welcomeVideo{
+#loopVideo,
+#transitionVideo{
+  position:absolute;
+  inset:0;
   width:100%;
   height:100%;
   object-fit:cover;
+}
+
+#transitionVideo{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.5s ease;
+}
+
+#transitionVideo.active{
+  opacity:1;
 }
 
 #welcomeOverlay{
@@ -59,6 +72,7 @@ body{
     rgba(0,0,0,.35)
   );
   pointer-events:none;
+  z-index:1;
 }
 
 #openInvitation{
@@ -106,7 +120,7 @@ body{
   position:relative;
   overflow:hidden;
   background:
-    linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.65)),
+    linear-gradient(rgba(255,255,255,.0),rgba(255,255,255,.0)),
     url("https://6a9f95e744e10f7189267349.imgix.net/sandbox/bk.png")
     center/cover;
 }
@@ -622,8 +636,14 @@ textarea{
 
 <div id="welcomeScreen">
 
-  <video id="welcomeVideo" muted playsinline preload="auto">
-    <source src="inicio.mp4" type="video/mp4">
+  <!-- Video en Loop Inicial -->
+  <video id="loopVideo" autoplay loop muted playsinline preload="auto">
+    <source src="loop.mp4" type="video/mp4">
+  </video>
+
+  <!-- Video de Transición -->
+  <video id="transitionVideo" playsinline preload="auto">
+    <source src="transicion.mp4" type="video/mp4">
   </video>
 
   <div id="welcomeOverlay"></div>
@@ -836,7 +856,7 @@ textarea{
 
           <div class="slide">
             <img
-              src="https://6a9f95e744e10f7189267349.imgix.net/sandbox/andrea-03.png"
+              src="https://6a9f95e744e10f7189267349.imgix.net/sandbox/andrea-10.png"
               alt="XV años 3">
           </div>
 
@@ -866,7 +886,7 @@ textarea{
 
           <div class="slide">
             <img
-              src="https://6a9f95e744e10f7189267349.imgix.net/sandbox/andrea-08.png"
+              src="https://6a9f95e744e10f7189267349.imgix.net/sandbox/andrea-09.png"
               alt="XV años 8">
           </div>
 
@@ -911,6 +931,7 @@ textarea{
 
       <p class="subtitle">
         Todo lo que debes saber
+
       </p>
 
       <div class="detail-grid">
@@ -1132,19 +1153,13 @@ textarea{
       <h3>Regalos</h3>
 
       <p>
-        Tu presencia es mi mejor regalo.
-      </p>
-
-      <p>
-        Si deseas obsequiarme algo especial,
-        puedes hacerlo mediante transferencia:
+        Su presencia es el mejor regalo que podemos recibir. Sin embargo, Si deseas tener un detalle adicional,
+           
       </p>
 
       <p>
         <b>
-          Banco: XXXX<br>
-          Cuenta: 0000000000<br>
-          Titular: Geovanny Molina
+         contaremos con un buzón para sobres el día de la recepción.
         </b>
       </p>
 
@@ -1157,11 +1172,12 @@ textarea{
 
 <script>
 /* =====================================================
-   BIENVENIDA Y VIDEO
+   BIENVENIDA Y TRANSICIÓN DE VIDEOS
 ===================================================== */
 
 const welcomeScreen = document.getElementById("welcomeScreen");
-const welcomeVideo = document.getElementById("welcomeVideo");
+const loopVideo = document.getElementById("loopVideo");
+const transitionVideo = document.getElementById("transitionVideo");
 const openInvitation = document.getElementById("openInvitation");
 const mainInvitation = document.getElementById("mainInvitation");
 
@@ -1173,7 +1189,19 @@ function enterInvitation(){
 
   invitationOpened = true;
 
-  // Iniciar la música de la invitación inmediatamente al hacer clic en el botón.
+  // Activar Pantalla Completa (Fullscreen)
+  const docEl = document.documentElement;
+  if (docEl.requestFullscreen) {
+    docEl.requestFullscreen().catch(err => {
+      console.log("No se pudo activar el modo pantalla completa:", err);
+    });
+  } else if (docEl.webkitRequestFullscreen) { /* Safari / iOS */
+    docEl.webkitRequestFullscreen();
+  } else if (docEl.msRequestFullscreen) { /* IE11 */
+    docEl.msRequestFullscreen();
+  }
+
+  // Iniciar la música de la invitación
   const music = document.getElementById("music");
   const musicBtn = document.getElementById("musicBtn");
 
@@ -1186,20 +1214,21 @@ function enterInvitation(){
     });
   }
 
-  // Ocultar botón y reproducir el video de bienvenida.
+  // Ocultar botón
   openInvitation.style.display = "none";
 
-  welcomeVideo.currentTime = 0;
-  welcomeVideo.muted = false;
+  // Pausar video loop y activar video de transición
+  loopVideo.pause();
+  transitionVideo.classList.add("active");
+  transitionVideo.currentTime = 0;
+  transitionVideo.muted = false;
 
-  const playPromise = welcomeVideo.play();
+  const playPromise = transitionVideo.play();
 
   if(playPromise !== undefined){
     playPromise.catch(function(){
-      // Si el navegador bloquea el audio, continúa reproduciendo sin sonido.
-      welcomeVideo.muted = true;
-      welcomeVideo.play().catch(function(){
-        // Si el video tampoco puede reproducirse, mostramos la invitación.
+      transitionVideo.muted = true;
+      transitionVideo.play().catch(function(){
         showMainInvitation();
       });
     });
@@ -1211,7 +1240,7 @@ function showMainInvitation(){
 
   if(welcomeScreen.style.display === "none") return;
 
-  welcomeVideo.pause();
+  transitionVideo.pause();
   welcomeScreen.style.opacity = "0";
 
   setTimeout(function(){
@@ -1219,7 +1248,7 @@ function showMainInvitation(){
     welcomeScreen.style.display = "none";
     mainInvitation.classList.add("show");
 
-    // Llevar al inicio de la invitación principal.
+    // Llevar al inicio de la invitación principal
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
 
@@ -1235,16 +1264,16 @@ function showMainInvitation(){
       });
     }
 
-  },1000);
+  }, 1000);
 }
 
 
-/* Al hacer clic: comienza el video y la canción */
+/* Al hacer clic en "Abrir invitación": solicita Fullscreen, reproduce música e inicia el video de transición */
 openInvitation.addEventListener("click", enterInvitation);
 
 
-/* Cuando termina el video: aparece la sección principal */
-welcomeVideo.addEventListener("ended", showMainInvitation);
+/* Al finalizar el video de transición: muestra la invitación principal */
+transitionVideo.addEventListener("ended", showMainInvitation);
 
 
 /* =====================================================
