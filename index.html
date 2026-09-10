@@ -76,27 +76,29 @@ body{
 }
 
 #openInvitation{
-  position:absolute;
-  bottom:45px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:2;
-  padding:15px 30px;
-  border:1px solid white;
-  border-radius:2px;
-  background:rgba(113,87,118,.88);
-  color:white;
-  font-family:Montserrat,sans-serif;
-  font-size:11px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  cursor:pointer;
-  transition:.3s;
+position: absolute;
+bottom: 30px;
+left: 50%;
+transform: translateX(-50%);
+z-index: 2;
+display: flex;
+align-items: center;
+gap: 8px;
+color: var(--deep);
+font-size: 11px;
+letter-spacing: 2px;
+text-transform: uppercase;
+text-decoration: none;
+background: rgba(255, 255, 255, 0.75);
+padding: 8px 14px;
+border-radius: 20px;
+backdrop-filter: blur(4px);
+transition: .3s;
 }
 
 #openInvitation:hover{
   background:white;
-  color:var(--deep);
+  color:var(--gold);
 }
 
 #mainInvitation{
@@ -174,7 +176,34 @@ body{
   width:max-content;
   max-width:100%;
   letter-spacing:4px;
-  font-size:13px;
+  font-size:25px;
+}
+
+/* Flecha inferior izquierda */
+.scroll-indicator-left{
+position: absolute;
+bottom: 30px;
+left: 50%;
+transform: translateX(-50%);
+z-index: 2;
+display: flex;
+align-items: center;
+gap: 8px;
+color: var(--deep);
+font-size: 11px;
+letter-spacing: 2px;
+text-transform: uppercase;
+text-decoration: none;
+background: rgba(255, 255, 255, 0.75);
+padding: 8px 14px;
+border-radius: 20px;
+backdrop-filter: blur(4px);
+transition: .3s;
+}
+
+.scroll-indicator-left:hover{
+  background:white;
+  color:var(--gold);
 }
 
 /* =========================
@@ -239,7 +268,7 @@ h2{
   letter-spacing:2px;
   font-size:12px;
   text-transform:uppercase;
-  margin-bottom:45px;
+  margin-bottom:30px;
 }
 
 /* =========================
@@ -316,23 +345,24 @@ h2{
   margin:0 0 18px;
 }
 
-.btn{
-  display:inline-block;
-  padding:13px 23px;
-  border:1px solid var(--deep);
-  color:var(--deep);
-  text-decoration:none;
-  background:transparent;
-  font-size:10px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  transition:.3s;
-  cursor:pointer;
+.btn {
+  display: inline-block;
+  padding: 13px 23px;
+  border: 1px solid var(--deep);
+  color: var(--deep);
+  text-decoration: none;
+  background: transparent;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: .3s;
+  cursor: pointer;
+  border-radius: 50px;
 }
 
-.btn:hover{
-  background:var(--deep);
-  color:white;
+.btn:hover {
+  background: var(--deep);
+  color: white;
 }
 
 /* =========================
@@ -360,7 +390,7 @@ h2{
 .slide{
   display:none;
   width:100%;
-  animation:fade .8s ease-in-out;
+  animation:fade .10s ease-in-out;
 }
 
 .slide.active{
@@ -387,7 +417,7 @@ h2{
   top:50%;
   transform:translateY(-50%);
   border:none;
-  background:rgba(0,0,0,.45);
+  background:rgba(0,0,0,.0);
   color:white;
   font-size:28px;
   width:50px;
@@ -400,7 +430,7 @@ h2{
 
 .prev:hover,
 .next:hover{
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.10);
 }
 
 .prev{left:20px}
@@ -585,6 +615,15 @@ textarea{
     letter-spacing:2px;
   }
 
+  .scroll-indicator-left{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+
   .event-grid,
   .detail-grid{
     grid-template-columns:1fr;
@@ -647,6 +686,7 @@ textarea{
   </video>
 
   <div id="welcomeOverlay"></div>
+	
 
   <button id="openInvitation">
     Abrir invitación
@@ -692,7 +732,41 @@ textarea{
 
     </div>
 
+    <!-- Flecha inferior izquierda invitando a seguir leyendo -->
+    <a href="#parentsSection" class="scroll-indicator-left" title="Seguir leyendo">
+      <span style="font-size: 16px;">↓</span>
+      <span>Conoce la historia completa</span>
+    </a>
+
   </header>
+
+
+  <!-- SECCIÓN DE PADRES Y PADRINOS -->
+  <section id="parentsSection" style="background: white; padding: 50px 0px; text-align: center;">
+    <div class="container">
+      
+     
+		<p class="lead" style="font-size: clamp(18px, 3.5vw, 18px); line-height: 1.6; max-width: 850px; margin: 0 auto; color: var(--text);">
+        <b></b>Hay momentos en la vida que se quedan grabados para siempre. Con la alegría de verla florecer
+        </p>
+		<p class="subtitle">
+        <b></b><br>sus padres:</p>
+		<div class="name">
+		<p class="name" style="font-size: clamp(30px, 3.5vw, 30px);">
+        Geovanny Molina <br>y<br> Cristina Ibarra</p></div>
+	    <p class="subtitle">
+        <b></b><br>y sus padrinos:</p>
+		<p class="name" style="font-size: clamp(30px, 3.5vw, 30px);">
+        Angel Molina Toala <br>y<br>Jessica Molina Toala<br></p>
+		<div class="lead">
+		<p class="lead" style="font-size: clamp(18px, 3.5vw, 18px); line-height: 1.6; max-width: 850px; margin: 0 auto; color: var(--text);">	
+        te invitan a compartir la mágica celebración de los XV de 
+		<div class="name">
+		<p class="name" style="font-size: clamp(40px, 3.5vw, 40px); color:lightpink">
+        Flor Andrea Molina Ibarra</p></div>
+        <div class="flower">❀↓❀</div>
+    
+  </section>
 
 
   <!-- INTRO -->
@@ -703,8 +777,8 @@ textarea{
       <div class="flower">❀</div>
 
       <p class="lead">
-        Te espero para compartir la alegría de una noche
-        que será para mí mágica, inolvidable y única.
+        Te esperamos para compartir la alegría de una noche
+        que será para mágica, inolvidable y única.
       </p>
 
       <div class="flower">❀</div>
@@ -787,14 +861,12 @@ textarea{
             </b><br>
             Una noche mágica nos espera
           </p>
-
-          <a
+         <button
             class="btn"
-            target="_blank"
-            href="https://wa.me/593986663919">
-            Confirmar asistencia
-          </a>
-
+            onclick="openModal('Asistencia')">
+            Confirmar Asistencia
+          </button>
+         
         </div>
 
 
@@ -813,7 +885,7 @@ textarea{
           <a
             class="btn"
             target="_blank"
-            href="https://maps.app.goo.gl/JAi6DUaYn9WKCo8P8">
+            href="https://maps.app.goo.gl/NGvPBMepJF3QCeCi9">
             Cómo llegar
           </a>
 
@@ -931,7 +1003,6 @@ textarea{
 
       <p class="subtitle">
         Todo lo que debes saber
-
       </p>
 
       <div class="detail-grid">
@@ -1044,7 +1115,6 @@ textarea{
 
   </footer>
 
-
   <!-- MODAL SUGERIR CANCIÓN -->
   <div class="modal" id="songModal">
 
@@ -1086,6 +1156,66 @@ textarea{
     </div>
 
   </div>
+		
+ <!-- MODAL ASISTENCIA -->
+  <div class="modal" id="Asistencia">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('Asistencia')">×</button>
+
+    <h3>Confirma tu Asistencia</h3>
+
+    <p>
+      Agradecemos confirmar tu asistencia antes del 20 de septiembre
+    </p>
+
+    <!-- Input para el nombre -->
+    <input
+      type="text"
+      id="guestName"
+      placeholder="Tu nombre y apellido">
+
+    <!-- Botones de Asistiré / No Asistiré -->
+    <div style="display: flex; gap: 10px; margin: 15px 0;">
+      <button 
+        type="button" 
+        class="btn" 
+        id="btnYes" 
+        onclick="selectAttendance('yes')" 
+        style="background-color: #715776; color: white; flex: 1;">
+        Asistiré
+      </button>
+      
+      <button 
+        type="button" 
+        class="btn" 
+        id="btnNo" 
+        onclick="selectAttendance('no')" 
+        style="background-color: #715776; color: white; flex: 1;">
+        No asistiré
+      </button>
+    </div>
+
+    <!-- Campo para cantidad de personas (Oculto por defecto) -->
+    <div id="peopleBox" style="display: none; margin-bottom: 15px; text-align: left;">
+      <label for="numPeople" style="font-size: 14px; display: block; margin-bottom: 5px;">¿Cuántas personas asistirán en total?</label>
+      <input 
+        type="number" 
+        id="numPeople" 
+        min="1" 
+        value="1" 
+        placeholder="Número de personas"
+        style="width: 100%; padding: 8px; box-sizing: border-box;">
+    </div>
+
+    <!-- Botón final para enviar por WhatsApp -->
+    <button
+      class="btn"
+      style="background-color: #25D366; color: white;"
+      onclick="sendToWhatsApp()">
+      Enviar por WhatsApp
+    </button>
+  </div>
+</div>
 
 
   <!-- MODAL VESTIMENTA -->
@@ -1154,7 +1284,6 @@ textarea{
 
       <p>
         Su presencia es el mejor regalo que podemos recibir. Sin embargo, Si deseas tener un detalle adicional,
-           
       </p>
 
       <p>
@@ -1517,7 +1646,98 @@ function sendSongSuggestion(){
   window.open(whatsappURL,"_blank");
 
 }
+	function sendAsistencia(){
+
+  const name =
+    document.getElementById("songName").value.trim();
+
+  const song =
+    document.getElementById("songArtist").value.trim();
+
+  const link =
+    document.getElementById("songLink").value.trim();
+
+  if(!name || !song){
+
+    alert("Por favor completa tu nombre y la canción.");
+    return;
+  }
+
+  const phone = "593986663919";
+
+  const message =
+    "🎵 *Nueva sugerencia para la playlist* 🎵\n\n" +
+    "👤 Nombre: " + name + "\n" +
+    "🎶 Canción y artista: " + song + "\n" +
+    "🔗 Link: " + (link || "No proporcionado");
+
+  const whatsappURL =
+    "https://wa.me/" +
+    phone +
+    "?text=" +
+    encodeURIComponent(message);
+
+  window.open(whatsappURL,"_blank");
+
+}
 </script>
 
+	  <script>
+  // ⚠️ REEMPLAZA ESTE NÚMERO con el tuyo (Código de país + número, sin espacios ni símbolos)
+  const WHATSAPP_NUMBER = "593986663919"; 
+
+  let attendanceStatus = ''; 
+
+  function selectAttendance(status) {
+    attendanceStatus = status;
+    const peopleBox = document.getElementById('peopleBox');
+    const btnYes = document.getElementById('btnYes');
+    const btnNo = document.getElementById('btnNo');
+
+    if (status === 'yes') {
+      peopleBox.style.display = 'block';
+      btnYes.style.opacity = '1';
+      btnNo.style.opacity = '0.5';
+    } else {
+      peopleBox.style.display = 'none';
+      btnYes.style.opacity = '0.5';
+      btnNo.style.opacity = '1';
+    }
+  }
+
+  function sendToWhatsApp() {
+    const name = document.getElementById('guestName').value.trim();
+    const numPeople = document.getElementById('numPeople').value;
+
+    if (!name) {
+      alert("Por favor, ingresa tu nombre.");
+      return;
+    }
+
+    if (!attendanceStatus) {
+      alert("Por favor, selecciona si asistirás o no.");
+      return;
+    }
+
+    // Construcción del mensaje para WhatsApp
+    let message = `Hola, soy *${name}*. `;
+    
+    if (attendanceStatus === 'yes') {
+      message += `¡Sí asistiré a los XV de Andrea! Confirmo asistencia para un total de *${numPeople}* persona(s).`;
+    } else {
+      message += `Lamentablemente no podré asistir a los XV de Andrea, pero les deseo una excelente velada.`;
+    }
+
+    // Codificar el texto para la URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Abrir WhatsApp con el mensaje prellenado
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+
+    // Cerrar el modal
+    closeModal('Asistencia');
+  }
+</script>
 </body>
 </html>
