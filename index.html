@@ -261,7 +261,7 @@ h2{
   font-size:50px;
   font-weight:500;
   color:var(--deep);
-  margin:0 0 12px;
+  margin:0 0 2px;
 }
 
 .subtitle{
@@ -664,6 +664,48 @@ textarea{
     bottom:12px;
   }
 }
+	.welcomeScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh; /* Solución para navegadores móviles modernos */
+  z-index: 99999;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+}
+
+.welcomeScreen video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover; /* Asegura que el video llene toda la pantalla sin deformarse */
+}
+
+.welcomeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Capa oscura opcional para resaltar el texto/botón */
+  z-index: 1;
+}
+
+.openInvitation {
+  position: relative;
+  z-index: 2;
+  /* Agrega aquí los estilos estéticos de tu botón (padding, color, fuente, etc.) */
+}
 </style>
 </head>
 
@@ -674,7 +716,6 @@ textarea{
 ===================================================== -->
 
 <div id="welcomeScreen">
-
   <!-- Video en Loop Inicial -->
   <video id="loopVideo" autoplay loop muted playsinline preload="auto">
     <source src="loop.mp4" type="video/mp4">
@@ -686,14 +727,11 @@ textarea{
   </video>
 
   <div id="welcomeOverlay"></div>
-	
 
   <button id="openInvitation">
     Abrir invitación
   </button>
-
 </div>
-
 
 <!-- =====================================================
      INVITACIÓN PRINCIPAL
@@ -743,16 +781,15 @@ textarea{
   <!-- SECCIÓN DE PADRES Y PADRINOS -->
   <section id="parentsSection" style="background: white; padding: 50px 0px; text-align: center;">
     <div class="container">
-      
-     
+         
 		<p class="lead" style="font-size: clamp(18px, 3.5vw, 18px); line-height: 1.6; max-width: 850px; margin: 0 auto; color: var(--text);">
         <b></b>Hay momentos en la vida que se quedan grabados para siempre. Con la alegría de verla florecer
         </p>
 		<p class="subtitle">
-        <b></b><br>sus padres:</p>
+        <b></b><br>su papá:</p>
 		<div class="name">
 		<p class="name" style="font-size: clamp(30px, 3.5vw, 30px);">
-        Geovanny Molina <br>y<br> Cristina Ibarra</p></div>
+        Geovanny Molina Toala</p></div>
 	    <p class="subtitle">
         <b></b><br>y sus padrinos:</p>
 		<p class="name" style="font-size: clamp(30px, 3.5vw, 30px);">
@@ -771,11 +808,92 @@ textarea{
   <!-- INTRO -->
   <section class="intro">
 
-    <div class="container">
+      <div class="container">
 
-      <div class="flower">❀</div>
+      <h2>La celebración</h2>
 
-      <p class="lead">
+      <p class="subtitle">
+        Guarda esta fecha especial
+      </p>
+
+      <div class="event-grid">
+
+        <div class="card">
+
+          <div class="icon">♡</div>
+
+          <h3>Fecha</h3>
+
+          <p>
+            Sábado<br>
+            <b>26 de Septiembre de 2026</b><br>
+            19:00 horas
+          </p>
+
+         <button
+            class="btn"
+            onclick="openModal('Asistencia')">
+            Confirmar Asistencia
+          </button>
+
+        </div>
+
+        <div class="card">
+
+          <div class="icon">⌂</div>
+
+          <h3>Misa</h3>
+
+          <p>
+            <b>
+              Iglesia Espiritu Santo<br>
+              Los Bosques
+            </b><br>
+            Calle 5 de junio 
+          </p>
+         <a
+            class="btn"
+            target="_blank"
+            href="https://maps.app.goo.gl/fCAqKXF6RbfD1KhV6">
+            Cómo llegar
+          </a>
+         
+        </div>
+
+
+        <div class="card">
+
+          <div class="icon">⌖</div>
+
+          <h3>Lugar</h3>
+
+          <p>
+            Salón de Eventos<br>
+            El Emperador<br>
+            Calle 5 de junio y Ulbio Alcivar
+			</p>
+
+          <a
+            class="btn"
+            target="_blank"
+            href="https://maps.app.goo.gl/NGvPBMepJF3QCeCi9">
+            Cómo llegar
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+   </section>
+
+
+  <!-- EVENTO -->
+ <div class="container" style="padding: 50px 0px; text-align: center;">
+      <div class="flower">❀</div> 
+      <h2>Admisión <span style="font-size: 1.5em; font-weight: bold;">2</span> personas</h2>
+      <p class="lead"><br>
         Te esperamos para compartir la alegría de una noche
         que será mágica, inolvidable y única.
       </p>
@@ -810,93 +928,8 @@ textarea{
 
       </div>
 
-    </div>
-
-  </section>
-
-
-  <!-- EVENTO -->
-  <section class="event">
-
-    <div class="container">
-
-      <h2>La celebración</h2>
-
-      <p class="subtitle">
-        Guarda esta fecha especial
-      </p>
-
-      <div class="event-grid">
-
-        <div class="card">
-
-          <div class="icon">♡</div>
-
-          <h3>Fecha</h3>
-
-          <p>
-            Sábado<br>
-            <b>26 de Septiembre de 2026</b><br>
-            19:00 horas
-          </p>
-
-          <button class="btn" onclick="addCalendar()">
-            Agendar evento
-          </button>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="icon">⌂</div>
-
-          <h3>Lugar</h3>
-
-          <p>
-            <b>
-              Salón de Evento<br>
-              Emperador
-            </b><br>
-            Una noche mágica nos espera
-          </p>
-         <button
-            class="btn"
-            onclick="openModal('Asistencia')">
-            Confirmar Asistencia
-          </button>
-         
-        </div>
-
-
-        <div class="card">
-
-          <div class="icon">⌖</div>
-
-          <h3>Dirección</h3>
-
-          <p>
-            Portoviejo<br>
-            Av. 5 de Junio<br>
-            Salón grande
-          </p>
-
-          <a
-            class="btn"
-            target="_blank"
-            href="https://maps.app.goo.gl/NGvPBMepJF3QCeCi9">
-            Cómo llegar
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
+    </div>		
+	
   <!-- GALERÍA -->
   <section class="gallery">
 
@@ -1682,61 +1715,75 @@ function sendSongSuggestion(){
 </script>
 
 	  <script>
-  // ⚠️ REEMPLAZA ESTE NÚMERO con el tuyo (Código de país + número, sin espacios ni símbolos)
   const WHATSAPP_NUMBER = "593986663919"; 
+let attendanceStatus = ''; 
 
-  let attendanceStatus = ''; 
+function selectAttendance(status) {
+  attendanceStatus = status;
+  const btnYes = document.getElementById('btnYes');
+  const btnNo = document.getElementById('btnNo');
 
-  function selectAttendance(status) {
-    attendanceStatus = status;
-    const peopleBox = document.getElementById('peopleBox');
-    const btnYes = document.getElementById('btnYes');
-    const btnNo = document.getElementById('btnNo');
+  if (status === 'yes') {
+    if (btnYes) btnYes.style.opacity = '1';
+    if (btnNo) btnNo.style.opacity = '0.5';
+  } else {
+    if (btnYes) btnYes.style.opacity = '0.5';
+    if (btnNo) btnNo.style.opacity = '1';
+  }
+}
 
-    if (status === 'yes') {
-      peopleBox.style.display = 'block';
-      btnYes.style.opacity = '1';
-      btnNo.style.opacity = '0.5';
-    } else {
-      peopleBox.style.display = 'none';
-      btnYes.style.opacity = '0.5';
-      btnNo.style.opacity = '1';
-    }
+function sendToWhatsApp() {
+  const name = document.getElementById('guestName').value.trim();
+
+  if (!name) {
+    alert("Por favor, ingresa tu nombre.");
+    return;
   }
 
-  function sendToWhatsApp() {
-    const name = document.getElementById('guestName').value.trim();
-    const numPeople = document.getElementById('numPeople').value;
+  if (!attendanceStatus) {
+    alert("Por favor, selecciona si asistirás o no.");
+    return;
+  }
 
-    if (!name) {
-      alert("Por favor, ingresa tu nombre.");
-      return;
-    }
+  let message = `Hola, soy *${name}*. `;
+  
+  if (attendanceStatus === 'yes') {
+    message += `¡Sí asistiré a los XV de Andrea!`;
+  } else {
+    message += `Lamentablemente no podré asistir a los XV de Andrea, pero les deseo una excelente velada.`;
+  }
 
-    if (!attendanceStatus) {
-      alert("Por favor, selecciona si asistirás o no.");
-      return;
-    }
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+  window.open(whatsappUrl, '_blank');
 
-    // Construcción del mensaje para WhatsApp
-    let message = `Hola, soy *${name}*. `;
-    
-    if (attendanceStatus === 'yes') {
-      message += `¡Sí asistiré a los XV de Andrea! Confirmo asistencia para un total de *${numPeople}* persona(s).`;
-    } else {
-      message += `Lamentablemente no podré asistir a los XV de Andrea, pero les deseo una excelente velada.`;
-    }
-
-    // Codificar el texto para la URL
-    const encodedMessage = encodeURIComponent(message);
-    
-    // Abrir WhatsApp con el mensaje prellenado
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
-
-    // Cerrar el modal
+  if (typeof closeModal === 'function') {
     closeModal('Asistencia');
   }
+} 
+</script>
+
+<script>
+  document.getElementById('openInvitation').addEventListener('click', function() {
+    const elem = document.documentElement; // O puedes usar document.getElementById('welcomeScreen')
+
+    // Solicitar pantalla completa compatible con todos los navegadores
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen().catch(err => {
+        console.log("No se pudo activar pantalla completa:", err.message);
+      });
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+
+    // --- AQUÍ PUEDES AGREGAR TU LÓGICA DE VIDEOS O OCULTAR LA PANTALLA ---
+    // Ejemplo:
+    // document.getElementById('loopVideo').style.display = 'none';
+    // document.getElementById('transitionVideo').style.display = 'block';
+    // document.getElementById('transitionVideo').play();
+  });
 </script>
 </body>
 </html>
